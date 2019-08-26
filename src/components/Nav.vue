@@ -13,13 +13,12 @@
 
     <v-divider></v-divider>
 
-    <v-list-item v-for="item in items" :key="item.title" link>
+    <v-list-item v-for="item in items" :key="item.title" :to="item.url" link>
         <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
-            <!-- <v-list-item-title><router-link to="/login-sales">Login</router-link></v-list-item-title> -->
             <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
     </v-list-item>
@@ -36,16 +35,24 @@ export default {
             items: [{
                     title: 'Dashboard',
                     icon: 'mdi-view-dashboard',
-                    url: '/'
+                    url: '/dashboard'
                 },
                 {
-                    title: 'Photos',
-                    icon: 'mdi-image'
+                    title: 'Clients',
+                    icon: 'mdi-account-multiple',
+                    url: '/dashboard/client-table'
                 },
                 {
-                    title: 'About',
-                    icon: 'mdi-help-box'
+                    title: 'Messages',
+                    icon: 'mdi-mail',
+                    url: '/dashboard/messages'
                 },
+                {
+                    title: 'Settings',
+                    icon: 'mdi-settings',
+                    url: '/dashboard/user-settings'
+                },
+                
             ],
             color: 'primary',
             colors: [

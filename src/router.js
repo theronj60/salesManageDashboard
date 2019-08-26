@@ -1,28 +1,47 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from './views/Home.vue'
 import Login from './views/Login.vue'
-import Dashboard2 from './views/Dashboard2.vue'
+import Dashboard from './views/Dashboard.vue'
+import UserSettings from './views/Dashboard/UserSettings.vue'
+import ClientTable from './views/Dashboard/ClientTable.vue'
+import User from './views/Dashboard/User.vue'
+import Messages from './views/Dashboard/Messages.vue'
 
 Vue.use(Router)
 
 export default new Router({
     mode: 'history',
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'home',
-        //     component: Home
-        // },
         {
             path: '/',
             name: 'login-sales',
             component: Login
         },
         {
-            path: '/dashboard2',
-            name: 'dashboard2',
-            component: Dashboard2
+            path: '/dashboard',
+            component: Dashboard,
+            children: [
+                {
+                    path: '',
+                    name: 'dashboard',
+                    component: User 
+                },
+                {
+                    path: 'client-table',
+                    name: 'clientTable',
+                    component: ClientTable
+                },
+                {
+                    path: 'messages',
+                    name: 'messages',
+                    component: Messages
+                },
+                {
+                    path: 'user-settings',
+                    name: 'settings',
+                    component: UserSettings
+                },
+            ]
         }
     ]
 })
