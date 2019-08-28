@@ -4,7 +4,7 @@
         <Nav />
         <template v-slot:append>
             <div class="pa-2">
-                <v-btn to="/" block color="error">Logout</v-btn>
+                <v-btn to="/" block color="error">Logout<v-icon>mdi-exit-to-app</v-icon> </v-btn>
             </div>
         </template>
     </v-navigation-drawer>
@@ -18,7 +18,7 @@
             <template v-slot:activator="{ on }">
                 <v-badge
                     overlap
-                    color="green"
+                    color="red"
                     
                     >
                         <template v-slot:badge>

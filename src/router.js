@@ -4,6 +4,7 @@ import Login from './views/Login.vue'
 import Dashboard from './views/Dashboard.vue'
 import UserSettings from './views/Dashboard/UserSettings.vue'
 import ClientTable from './views/Dashboard/ClientTable.vue'
+import AddClient from './views/Dashboard/AddClient.vue'
 import User from './views/Dashboard/User.vue'
 import Messages from './views/Dashboard/Messages.vue'
 
@@ -30,6 +31,11 @@ export default new Router({
                     path: 'client-table',
                     name: 'clientTable',
                     component: ClientTable
+                },
+                {
+                    path: 'add-client',
+                    name: 'addClient',
+                    component: AddClient
                 },
                 {
                     path: 'messages',
