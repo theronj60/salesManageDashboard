@@ -37,7 +37,7 @@
                           <v-card-actions>
                               <v-btn to="/" color="warning">Back</v-btn>
                               <v-spacer></v-spacer>
-                              <v-btn color="success"> <a href="/dashboard">Login</a> </v-btn>
+                              <v-btn color="success" to="/dashboard">Login</v-btn>
                           </v-card-actions>
                       </v-card>
                   </v-flex>

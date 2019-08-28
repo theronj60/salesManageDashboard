@@ -43,6 +43,11 @@ export default {
                     url: '/dashboard/client-table'
                 },
                 {
+                    title: 'Add Client',
+                    icon: 'mdi-account-plus',
+                    url: '/dashboard/add-client'
+                },
+                {
                     title: 'Messages',
                     icon: 'mdi-mail',
                     url: '/dashboard/messages'

@@ -21,267 +21,274 @@
                 :headers="headers"
                 :items="clients"
                 :search="search"
+                calculate-widths
+                expand
                 >
-               
-                <template v-slot:item.action="{ item }">
-                  
-                      
-                      <!-- <v-icon
-                          small
-                          class="mr-2"
-                          @click="editItem(item)"
-                          >
-                          edit
-                          </v-icon>
-                          <v-icon
-                          small
-                          @click="deleteItem(item)"
-                          >
-                          delete
-                      </v-icon> -->
-                 <ClientActions />
-                                  
+
+                <template slot="items" slot-scope="props">
+                  <tr @click="props.expanded = !props.expanded"></tr>
                 </template>
+                
+
+                <template v-slot:item.welcome="{ item }">
+                  <v-icon :color="item.welcome === 'mdi-star' ? 'yellow' : '' " >{{ item.welcome }}</v-icon>
+                </template>
+
+                <template v-slot:item.firstSession="{ item }">
+                  <v-icon :color="item.firstSession === 'mdi-star' ? 'green' : '' ">{{ item.firstSession }}</v-icon>
+                </template>
+
+                <template slot="expand">
+                  <v-card flat>
+                    <v-card-text>
+                      testing
+                    </v-card-text>
+                    <div class="datatable-container"></div>
+                  </v-card>
+                </template>
+
+                <!-- <template v-slot:item="{ item }">
+                  <v-expansion-panels>
+                  <v-expansion-panel
+                    v-for="(item,i) in 5"
+                    :key="i"
+                  >
+                    <v-expansion-panel-header>Item</v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+                </template> -->
+                
                 
                 </v-data-table>
                  
 
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on"><v-icon>add</v-icon> New Client</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">New Client</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field label="Name"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12>
-                    <v-text-field label="Address"></v-text-field>
-                  </v-flex>
-                  <v-flex xs8>
-                    <v-text-field label="City"></v-text-field>
-                  </v-flex>
-                  <v-flex xs4>
-                    <v-text-field label="State"></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm6 md4>
-                    <v-text-field label="Phone #"></v-text-field>
-                  </v-flex>
-                  <v-spacer></v-spacer>
-                  <v-flex xs12 sm6>
-                    <v-select
-                      :items="products"
-                      label="Package"
-                    ></v-select>
-                </v-flex>
-                  <v-flex xs12>
-                    <v-text-field label="Additional Notes"></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text
-              >Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        
         </v-container>
 </template>
 
 <script>
-import ClientActions from '@/components/ClientActions.vue';
+// import ClientActions from '@/components/ClientActions.vue';
 
   export default {
       name: 'clientTable',
       components: {
-        ClientActions,
+        // ClientActions,
       },
     data () {
       return {
         search: '',
-        dialog: false,
-        products: [
-            'basic',
-            'pro',
-            'ultimate'
-        ],
         headers: [
-          {
-            text: 'Name',
-            align: 'left',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Address', value: 'address' },
-          { text: 'City', value: 'city' },
-          { text: 'State', value: 'state' },
-          { text: 'Phone #', value: 'phone' },
-          { text: 'Product', value: 'product' },
+          { text: 'Id', align: 'left', value: 'id',},
+          { text: 'Name', value: 'name' },
+          { text: 'Status', value: 'status' },
+          { text: 'Coach', value: 'coach' },
+          { text: 'Register Date', value: 'date' },
+          // { text: 'Phone', value: 'phone' },
+          { text: 'Welcome Call', value: 'welcome' },
+          { text: 'First Session', value: 'firstSession' },
+          { text: 'Next Apt', value: 'appointment' },
           { text: 'Notes', value: 'notes' },
-          { text: 'Actions', value: 'action', sortable: false }
+          // { text: 'Actions', value: 'action', sortable: false }
         ],
         clients: [
           {
+            id: '1',
             name: 'Jane Doe',
-            address: '123 Main Street',
-            city: 'New York',
-            state: 'New York',
+            status: 'On hold',
+            coach: 'Janet',
+            date: '12/30/19',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star-outline',
+            appointment: 'NA',
             notes: 'sample note'
           },
           {
+            id: '2',
             name: 'Sarah Connor',
-            address: '789 W 23 S',
-            city: 'Los Angeles',
-            state: 'California',
+            status: 'Active',
+            coach: 'Jerry',
+            date: '09/15/19',
             phone: '(234)657-4563',
-            product: 'Ultimate',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star',
+            appointment: '10/01/19',
             notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
           },
           {
+            id: '3',
             name: 'Theresa Bagby',
-            address: '19 E 234 W',
-            city: 'Sandy',
-            state: 'Utah',
+            status: 'Active',
+            coach: 'Sally',
+            date: '02/10/19',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star-outline',
+            appointment: '09/12/19',
             notes: 'sample note'
           },
           {
+            id: '4',
             name: 'Rudy Smith',
-            address: '933 E 239 N',
-            city: 'Henderson',
-            state: 'Nevada',
+            status: 'Inactive',
+            coach: 'Jerry',
+            date: '06/19/19',
             phone: '(678)734-2311',
-            product: 'Pro',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star',
+            appointment: 'NA',
             notes: 'Duis aute irure dolor in reprehenderit in voluptate velit'
           },
           {
+            id: '5',
             name: 'Paddy Jenkins',
-            address: '12th Street',
-            city: 'Seattle',
-            state: 'Washington',
+            status: 'Active',
+            coach: 'Kate',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star',
+            appointment: '',
             notes: 'sample note'
           },
           {
+            id: '6',
             name: 'John Doe',
-            address: '12th Avenue',
-            city: 'Chicago',
-            state: 'Illinois',
+            status: 'Canceled',
+            coach: 'Sally',
+            date: '08/05/19',
             phone: '(789)746-7368',
-            product: 'Pro',
+            welcome: 'mdi-star-outline',
+            firstSession: 'mdi-star-outline',
+            appointment: 'NA',
             notes: 'sample note'
           },
           {
+            id: '7',
             name: 'Sarah Connor',
-            address: '789 W 23 S',
-            city: 'Los Angeles',
-            state: 'California',
+            status: 'Active-Complete',
+            coach: 'Luara',
+            date: '',
             phone: '(234)657-4563',
-            product: 'Ultimate',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star',
+            appointment: '',
             notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
           },
           {
+            id: '8',
             name: 'Theresa Bagby',
-            address: '19 E 234 W',
-            city: 'Sandy',
-            state: 'Utah',
+            status: 'Active',
+            coach: 'Luara',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: 'mdi-star',
+            firstSession: 'mdi-star',
+            apointment: '',
             notes: 'sample note'
           },
           {
+            id: '9',
             name: 'Rudy Smith',
-            address: '933 E 239 N',
-            city: 'Henderson',
-            state: 'Nevada',
+            status: 'Canceled',
+            coach: 'Luara',
+            date: '',
             phone: '(678)734-2311',
-            product: 'Pro',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'Duis aute irure dolor in reprehenderit in voluptate velit'
           },
           {
+            id: '10',
             name: 'Paddy Jenkins',
-            address: '12th Street',
-            city: 'Seattle',
-            state: 'Washington',
+            status: 'Active',
+            coach: 'Tom',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'sample note'
           },
           {
+            id: '11',
             name: 'John Doe',
-            address: '12th Avenue',
-            city: 'Chicago',
-            state: 'Illinois',
+            status: 'Active',
+            coach: 'Harry',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Pro',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'sample note'
           },
           {
+            id: '12',
             name: 'Sarah Connor',
-            address: '789 W 23 S',
-            city: 'Los Angeles',
-            state: 'California',
+            status: 'Active',
+            coach: 'Tom',
+            date: '',
             phone: '(234)657-4563',
-            product: 'Ultimate',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
           },
           {
+            id: '13',
             name: 'Theresa Bagby',
-            address: '19 E 234 W',
-            city: 'Sandy',
-            state: 'Utah',
+            status: 'Active',
+            coach: 'Nancy',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'sample note'
           },
           {
+            id: '14',
             name: 'Rudy Smith',
-            address: '933 E 239 N',
-            city: 'Henderson',
-            state: 'Nevada',
+            status: 'Active',
+            coach: 'Nancy',
+            date: '',
             phone: '(678)734-2311',
-            product: 'Pro',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'Duis aute irure dolor in reprehenderit in voluptate velit'
           },
           {
+            id: '15',
             name: 'Paddy Jenkins',
-            address: '12th Street',
-            city: 'Seattle',
-            state: 'Washington',
+            status: 'Active',
+            coach: 'Sally',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Basic',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'sample note'
           },
           {
+            id: '16',
             name: 'John Doe',
-            address: '12th Avenue',
-            city: 'Chicago',
-            state: 'Illinois',
+            status: 'Active',
+            coach: 'Jerry',
+            date: '',
             phone: '(789)746-7368',
-            product: 'Pro',
+            welcome: '',
+            firstSession: '',
+            appointment: '',
             notes: 'sample note'
           },
         ],
       }
     },
-    methods: {
-        close () {
-            this.dialog = false
-        }
-    }
+    
   }
 </script>
