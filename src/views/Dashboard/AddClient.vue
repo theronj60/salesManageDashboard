@@ -1,5 +1,5 @@
 <template>
-    <v-stepper v-model="e1" alt-labels class="steps align-self-md-start">
+    <v-stepper v-model="e1" class="steps align-self-md-start">
     <v-stepper-header>
       <v-stepper-step :complete="e1 > 1" step="1">Client Information</v-stepper-step>
 
@@ -16,10 +16,10 @@
 
         <v-stepper-items>
         <v-stepper-content step="1">
-            <v-card
+            <!-- <v-card
             class="mb-12"
             fill-height
-            >
+            > -->
 
                 <v-container>
 
@@ -122,8 +122,9 @@
                     
                 </v-container>
 
-            </v-card>
+            <!-- </v-card> -->
 
+        <v-container class="mt-12">
             <v-btn
             color="primary"
             @click="e1 = 2"
@@ -132,17 +133,67 @@
             </v-btn>
 
             <v-btn text>Cancel</v-btn>
+        </v-container>
+            
         </v-stepper-content>
 
         <v-stepper-content step="2">
             <v-card
             class="mb-12"
-            color="grey lighten-1"
-            height="200px"
             >
-            
+                <v-container class="">
+                    <v-row>
+
+                        <v-col cols="12" sm="4">
+                            <h3>Corporate Products</h3>  
+                            <br>
+                            <p>{{ corporateProducts }}</p>     
+                            <v-checkbox v-model="corporateProducts" v-for="product in products" :label="product" :value="product" :key="product" ></v-checkbox>
+                        </v-col>
+
+                        <v-col cols="12" sm="4">
+                            <h3>
+                                Hosting Plan
+                            </h3>
+                            <br>
+                            <p>{{ hostingPlan }}</p>
+                            <v-checkbox v-model="hostingPlan" v-for="host in hosting" :label="host" :value="host" :key="host"></v-checkbox>
+                            <h3>
+                                Drop Shipping
+                            </h3>
+                            
+                            <br>
+                            <p>{{ dropShipping }}</p>
+                            <v-checkbox v-model="dropShipping" v-for="item in dropItems" :label="item" :value="item" :key="item"></v-checkbox>
+
+                            <h3>
+                                Sales Dispositions
+                            </h3>
+                            <br>
+                            
+                            <h3>
+                                Custom Products
+                            </h3>
+                            <br>
+                            <p>{{ customProducts }}</p>
+                            <v-checkbox v-model="customProducts" v-for="item in customItems" :label="item" :value="item" :key="item"></v-checkbox>
+                        </v-col>
+
+                        <v-col>
+                            <h3>
+                                Custom Products
+                            </h3>
+                            <br>
+                            <p>{{ other }}</p>
+                            <v-checkbox v-model="other" v-for="item in otherOptions" :label="item" :value="item" :key="item"></v-checkbox>
+                        </v-col>
+
+                    </v-row>
+                </v-container>
             </v-card>
 
+
+        <v-container class="mt-12">
             <v-btn
             color="primary"
             @click="e1 = 3"
@@ -151,17 +202,33 @@
             </v-btn>
 
             <v-btn text>Cancel</v-btn>
+        </v-container>
+            
         </v-stepper-content>
 
         <v-stepper-content step="3">
             <v-card
             class="mb-12"
-            color="grey lighten-1"
             height="200px"
             >
-            
+
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <v-text-field
+                                v-model="firstname"
+                                :rules="nameRules"
+                                :counter="10"
+                                label="First name"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+
             </v-card>
 
+        <v-container class="mt-12">
             <v-btn
             color="primary"
             @click="e1 = 1"
@@ -170,6 +237,8 @@
             </v-btn>
 
             <v-btn text>Cancel</v-btn>
+        </v-container>
+            
         </v-stepper-content>
         </v-stepper-items>
 
@@ -182,7 +251,7 @@
   export default {
     data () {
       return {
-        e1: 0,
+        e1: 2,
         valid: false,
         // Client Info
         firstname: '',
@@ -230,6 +299,72 @@
         ],
 
         // Products
+        // sessionAmount: '',
+        // sessionTime: [
+
+        // ],
+        sessionType: '',
+        sessionOptions: [
+            'eBay - Affiliate Marketing',
+            'Fast Track (4 extra sessions)',
+            'One Extra Session'
+        ],
+        corporateProducts: [],
+        products: [
+            'Corporate Credit',
+            'Corporate Setup',
+            'Corporate Website',
+            '5 Corporate Credit Sessions',
+            '3 Corporate Website Sessions',
+            'Merchant Account Setup',
+            'Resident Agent',
+            'Corp Setup Minimum',
+            'Corp Credit Minimum',
+            'Business Plan',
+            'Corp Credits Docs',
+            'Dun & Bradstreet'
+        ], 
+        hostingPlan: '',
+        hosting: [
+            'No Hosting',
+            'Hosting 9.95 Monthly',
+            'Hosting 17.95 Monthly',
+            'Hosting 39.95 Monthly'
+        ],
+        dropShipping: '',
+        dropItems: [
+            'No Dropship',
+            'Ultimate Dropship Lite',
+            'Ultimate Dropship Plus'
+        ],
+        customProducts: [],
+        customItems:[
+            '6 Months Free Hosting',
+            'Tax Prep'
+        ],
+        other: [],
+        otherOptions: [
+            'Product Sourcing Package',
+            'Research Center',
+            'Niche Developer',
+            'Easy Listing Program',
+            'Custom Built Site',
+            'Back Links',
+            'Article Submission',
+            '3 Months Free Hosting',
+            'Social Media Package',
+            'Facebook FanPage',
+            'Twitter Business Page',
+            'SEO Developer',
+            'Content Writing',
+            'Website Training',
+            'Social Media Minimum',
+            'Logo Design',
+            'SEO Developer Minimum',
+            'QR Coding',
+            'Free Domain Name',
+            'Product Sourcing (Directory)'
+        ]
 
         // Billing Info
       }
@@ -239,7 +374,7 @@
 
 <style>
     .steps {
-        /* height: 750px; */
+        height: 100%;
         width: 100%;
     }
 </style>
