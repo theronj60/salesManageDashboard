@@ -72,7 +72,7 @@
                 </template>
 
                 </v-data-table>
-                 
+                
         </v-container>
 </template>
 
