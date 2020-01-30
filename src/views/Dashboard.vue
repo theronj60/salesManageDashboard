@@ -29,7 +29,7 @@
                             color="dark-grey"
                             v-on="on"
                         >
-                            notifications
+                            Notifications
                         </v-icon>
                 </v-badge>
             </template>
