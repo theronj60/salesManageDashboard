@@ -21,12 +21,45 @@
                 :headers="headers"
                 :items="clients"
                 :search="search"
+                single-expand
+                show-expand
+                
                 calculate-widths
-                expand
+                
                 >
 
-                <template slot="items" slot-scope="props">
-                  <tr @click="props.expanded = !props.expanded"></tr>
+                <template v-slot:expanded-item="{ item }">
+                  <td colspan="12">
+                    <v-container>
+                      <v-row class="justify-end">
+                        <v-spacer></v-spacer>
+                        <v-col>
+                          <h4>Phone Number:</h4>
+                          <p>{{ item.phone }}</p>
+                          <h4>Email:</h4>
+                          <p>{{ item.email }}</p>
+                        </v-col>
+                        <v-col>
+                          <h4>Address:</h4>
+                          <p>{{item.address + ' ' +item.city + ', ' + item.state}}</p>
+                          <h4>Recent Activity:</h4>
+                          <!-- could pull last logged activity -->
+                          <p>Completed Lesson 8: Blogging 8-14-19</p>
+                        </v-col>
+                        <v-col>
+                          <h4>Next Appointment:</h4>
+                          <p>{{ item.appointment }}</p>
+                          <h4>Notes:</h4>
+                          <p>{{ item.notes }}</p>
+                        </v-col>
+                        <v-col class="align-self-center text-center">
+                          <v-btn to=/dashboard/view-client>
+                            View Client
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </td>
                 </template>
                 
 
@@ -38,44 +71,16 @@
                   <v-icon :color="item.firstSession === 'mdi-star' ? 'green' : '' ">{{ item.firstSession }}</v-icon>
                 </template>
 
-                <template slot="expand">
-                  <v-card flat>
-                    <v-card-text>
-                      testing
-                    </v-card-text>
-                    <div class="datatable-container"></div>
-                  </v-card>
-                </template>
-
-                <!-- <template v-slot:item="{ item }">
-                  <v-expansion-panels>
-                  <v-expansion-panel
-                    v-for="(item,i) in 5"
-                    :key="i"
-                  >
-                    <v-expansion-panel-header>Item</v-expansion-panel-header>
-                    <v-expansion-panel-content>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </v-expansion-panel-content>
-                  </v-expansion-panel>
-                </v-expansion-panels>
-                </template> -->
-                
-                
                 </v-data-table>
-                 
-
-        
+                
         </v-container>
 </template>
 
 <script>
-// import ClientActions from '@/components/ClientActions.vue';
 
   export default {
       name: 'clientTable',
       components: {
-        // ClientActions,
       },
     data () {
       return {
@@ -86,17 +91,17 @@
           { text: 'Status', value: 'status' },
           { text: 'Coach', value: 'coach' },
           { text: 'Register Date', value: 'date' },
-          // { text: 'Phone', value: 'phone' },
           { text: 'Welcome Call', value: 'welcome' },
           { text: 'First Session', value: 'firstSession' },
-          { text: 'Next Apt', value: 'appointment' },
-          { text: 'Notes', value: 'notes' },
-          // { text: 'Actions', value: 'action', sortable: false }
         ],
         clients: [
           {
             id: '1',
             name: 'Jane Doe',
+            address: '123 Main St.',
+            city: 'Boise',
+            state: 'Idaho',
+            email:'janed@test.com',
             status: 'On hold',
             coach: 'Janet',
             date: '12/30/19',
@@ -109,6 +114,10 @@
           {
             id: '2',
             name: 'Sarah Connor',
+            address: '53 South 24 East',
+            city: 'Hurricane',
+            state: 'Utah',
+            email:'connor97@test.com',
             status: 'Active',
             coach: 'Jerry',
             date: '09/15/19',
