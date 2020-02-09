@@ -1,15 +1,15 @@
 <template>
     <v-stepper v-model="e1" class="steps align-self-md-start">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Client Information</v-stepper-step>
+        <v-stepper-step :complete="e1 > 1" step="1">Client Information</v-stepper-step>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">Products</v-stepper-step>
+        <v-stepper-step :complete="e1 > 2" step="2">Products</v-stepper-step>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-stepper-step step="3">Billing Information</v-stepper-step>
+        <v-stepper-step step="3">Billing Information</v-stepper-step>
     </v-stepper-header>
 
     <v-form v-model="valid">
@@ -84,7 +84,7 @@
                                     label="Zip Code"
                                     required
                                 ></v-text-field>
-                                 
+                                
                                 </v-col>
                             </v-row>
                         </v-col>
@@ -244,14 +244,14 @@
 
     </v-form>
 
-  </v-stepper>
+    </v-stepper>
 </template>
 
 <script>
-  export default {
+    export default {
     data () {
-      return {
-        e1: 2,
+        return {
+        e1: 1,
         valid: false,
         // Client Info
         firstname: '',
@@ -282,20 +282,20 @@
             ],
         // state info
         states: [
-          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-          'Arkansas', 'California', 'Colorado', 'Connecticut',
-          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-          'Missouri', 'Montana', 'Nebraska', 'Nevada',
-          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+            'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+            'Arkansas', 'California', 'Colorado', 'Connecticut',
+            'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+            'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+            'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+            'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+            'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+            'Missouri', 'Montana', 'Nebraska', 'Nevada',
+            'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+            'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+            'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+            'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+            'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+            'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
         ],
 
         // Products
@@ -367,9 +367,9 @@
         ]
 
         // Billing Info
-      }
+        }
     },
-  }
+    }
 </script>
 
 <style>
