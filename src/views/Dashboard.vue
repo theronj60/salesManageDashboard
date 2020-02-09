@@ -1,6 +1,6 @@
 <template>
 <v-app id="inspire">
-     <v-navigation-drawer v-model="drawerRight" app clipped left>
+    <v-navigation-drawer v-model="drawerRight" app clipped left>
         <Nav />
         <template v-slot:append>
             <div class="pa-2">
@@ -62,9 +62,9 @@
     </v-content>
 
     <v-footer app color="blue-grey" class="white--text">
-        <span>Oracle Learning Center V.2</span>
+        <span>Sales Dash Demo</span>
         <v-spacer></v-spacer>
-        <span>&copy; 2019</span>
+        <span>&copy; 2020</span>
     </v-footer>
     
 </v-app>
@@ -78,7 +78,7 @@ export default {
     name: 'dash-nav',
     components: {
         Nav,
-       
+    
     },
     data: () => ({
         drawerRight: false,
